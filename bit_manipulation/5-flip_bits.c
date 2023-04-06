@@ -1,20 +1,33 @@
 /**
- * flip_bits - A function that gets number of bits needed to flip
- * @n: How many bit flips are needed to equal m for n
- * @m: The number to set other equal
- * Return: The number of fliped bits
+ * flip_bits - gets the number of bits flipped form n to m
+ * @n: initial lu int
+ * @m: secondary lu int
+ *
+ * Return: number of bits need to flip to get from `n to `m`
  */
+
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned int flips = 0;
-	unsigned long int xor = (n ^ m);
-	unsigned long int max = 0x01;
+	unsigned long int size;
+	unsigned long int flipped;
+	unsigned long int i;
 
-	while (max <= xor)
+	size = sizeof(n) * 8 - 1;
+
+	flipped = 0;
+	i = 0;
+
+	while (i <= size)
 	{
-		if (max & xor)
-			flips++;
-		max <<= 1;
+		if ((n & 1) != (m & 1))
+			flipped++;
+
+		n = n >> 1;
+		m = m >> 1;
+
+		i++;
 	}
-	return (flips);
+
+	return (flipped);
+
 }
